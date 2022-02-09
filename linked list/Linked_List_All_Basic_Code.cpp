@@ -131,6 +131,23 @@ void removal_duplicate(node *p)
     }
 }
 
+//--------> REMOVAL OF DUPLICATE IN SORTED L.L  2nd METHOD <---
+
+
+void removal_of_duplicate(){
+    node *last = first;
+    node *p = first->next;
+
+    while(p){
+        if(p->data == last->data) p = p->next;
+        else{
+            last->next = p;
+            last = p;
+            p = p->next;
+        }
+    }
+}
+
 //----------------->   DELETETION    <-------------
 
 int delete1(int index)

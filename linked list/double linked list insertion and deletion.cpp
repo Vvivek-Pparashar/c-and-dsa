@@ -72,6 +72,25 @@ void display_rev(node *p){
     }
 }
 
+// reverse a doubly linked list..
+
+void reverse1(){
+    node *p = first;
+
+
+    while(p){
+        node *q = p->next;
+        p->next = p->pre;
+        p->pre = q;
+
+        if(p->pre) p=q;
+        else{
+            first = p;
+            p = q;
+        }
+    }
+}
+
 
 int main()
 {

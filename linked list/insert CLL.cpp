@@ -14,6 +14,29 @@ public:
         node *next;
 }*first;
 
+
+// FOR REVERSE THE CIRCULAR LINKED LIST
+
+void reverse_loop(){
+    node *third = NULL;
+    node *second = NULL;
+    node *head = first;
+
+    node *rev = first;
+
+    do{
+        third = second;
+        second = head;
+        head = head->next;
+
+        second->next = third;
+    }while(head !=first);
+
+    first = second;
+    rev ->next = first;
+}
+
+
 void display(node *p)
 {
     do{
