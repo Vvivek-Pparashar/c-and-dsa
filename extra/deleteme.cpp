@@ -8,6 +8,8 @@ using namespace std;
 #define vivek_is_great ios_base::sync_with_stdio(false) , cin.tie(NULL);
 #define all(v) v.begin(),v.end()
 
+
+// MOST OF THE TIME WE USE THE POST ORDER FOR DOING ALL THE STUFF ON A TREE LIKE e.g. count, accumulate, etc........
 class node
 {
 public:
@@ -101,11 +103,55 @@ void display(node *p)
     }
 }
 
+// RECURSIVE SEARCH IN BINARY TREE....
+node *recursive_search(node *p, int key){
+    if(p){
+        //return (p->data == key ? p : recursive_search((p->data > key ? p->lchild : p->rchild), key));
+        if(key == p->data) return p;
+        else if(key < p->data) return recursive_search(p->lchild, key);
+        return recursive_search(p->rchild, key);
+    }
+    return NULL;
+}
+
+// ITERATIVE SEARCH IN BINARY TREE.....
+node *iterative_search(node *p, int key){
+    while(p){
+        if(p->data == key) return p;
+        else if(p->data > key) p = p->lchild;
+        else p = p->rchild;
+    }
+    return NULL;
+}
+
+// INSERTION IN BINARY SEARCH TREE....
+void inserting(int key){
+    node *p = root;
+    node *last = NULL;
+
+    while(p){
+        last = p;
+        if(p->data == key) return;
+        else if(p->data > key) p = p->lchild;
+        else p = p->rchild;
+    }
+
+    node *new1 = new node;
+    new1->data = key;
+    new1->lchild = new1->rchild = NULL;
+
+    if(key > last->data) last->rchild = new1;
+    else last->lchild = new1;
+}
+
 
 int main()
 {
     create();
     create_tree();
 
+    display(root);
+    cout<<endl;
+    inserting(12);
     display(root);
 }
