@@ -106,7 +106,7 @@ void display(node *p)
 // RECURSIVE SEARCH IN BINARY TREE....
 node *recursive_search(node *p, int key){
     if(p){
-        //return (p->data == key ? p : recursive_search((p->data > key ? p->lchild : p->rchild), key));
+        //return (p->data == key ? p : recursive_search((p->data > key ? p->lchild : p->rchild), key));  -------FOR ONE LINE CODE....-------
         if(key == p->data) return p;
         else if(key < p->data) return recursive_search(p->lchild, key);
         return recursive_search(p->rchild, key);
@@ -144,14 +144,72 @@ void inserting(int key){
     else last->lchild = new1;
 }
 
+// CREATE BINARY TREE BY INSERTION RECURSIVE......
+node *insert(node *p, int key){
+    if(!p){
+        node *t;
+        t = new node;
+        t->data = key;
+        t->lchild = t->rchild = NULL;
+        return t;
+    }
+
+    else if(p->data > key){
+        p->rchild = insert(p->rchild, key);
+    }else if(p->data < key){
+        p->lchild = insert(p->lchild, key);
+    }
+
+    return p;
+}
+
+
+// CREATE BINARY TREE BY INSERTION ITERATIVE......
+void insert_iterator1(int key){
+    node *p = root;
+    node *r, *t;
+
+    if(!p){
+        t = new node;
+        t->data = key;
+        t->lchild = t->rchild = NULL;
+
+        root = t;
+        return;
+    }
+
+    while(p){
+            r = p;
+        if(p->data > key) p = p->lchild;
+        else if(p->data < key) p = p->rchild;
+        else return;
+
+    }
+
+    t = new node;
+    t->data = key;
+    t->lchild = t->rchild = NULL;
+
+    if(key > r->data) r->rchild = t;
+    else r->lchild = t;
+}
+
 
 int main()
 {
-    create();
-    create_tree();
+    //create();
+    //create_tree();
+
+    //root = insert(root, 2);   // this is recursive type example......
+    insert_iterator1(1);
+    insert_iterator1(2);
+    insert_iterator1(6);
+    insert_iterator1(3);
+    insert_iterator1(9);
+
+    //inserting(12);
 
     display(root);
-    cout<<endl;
-    inserting(12);
-    display(root);
+    //cout<<endl;
+   //display(root);
 }
