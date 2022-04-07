@@ -195,6 +195,65 @@ void insert_iterator1(int key){
 }
 
 
+int height(node *p){
+    int x, y;
+    if(p){
+        x = height(p->lchild);
+        y = height(p->rchild);
+
+        return (x>y ? x+1 : y+1);
+    }
+}
+
+node *inpre(node *p){
+    while(p && p->rchild!=NULL){
+        p= p->rchild;
+    }
+
+    return p;
+}
+
+node *insucc(node *p){
+    while(p && p->lchild!=NULL){
+        p= p->lchild;
+    }
+
+    return p;
+}
+// DELETING IN BINARY SERACH TREE.....
+node *deletion(node *p, int key){
+
+    node *q;
+
+    if(!p) return NULL;
+    if(!p->lchild && !p->rchild){
+        if(p == root){
+            root = NULL;
+        }
+
+        delete p;
+        return NULL;
+    }
+
+    if(key < p->data){
+        p->lchild = deletion(p->lchild, key);
+    }else if(key > p->data){
+        p->rchild = deletion(p->rchild, key);
+    }else{
+        if(height(p->lchild) > height(p->rchild)){
+            q = inpre(p->lchild);
+            p->data = q->data;
+            p->lchild = deletion(p->lchild, q->data);
+        }else{
+            q = insucc(p->rchild);
+            p->data = q->data;
+            p->rchild = deletion(p->rchild, q->data);
+        }
+    }
+
+    return p;
+}
+
 int main()
 {
     //create();
@@ -209,6 +268,7 @@ int main()
 
     //inserting(12);
 
+    deletion(root, 6);
     display(root);
     //cout<<endl;
    //display(root);

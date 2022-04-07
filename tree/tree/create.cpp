@@ -94,38 +94,27 @@ void create_tree(){
     }
 }
 
-void display(node *p)
-{
+void display_pre(node *p){
     if(p){
         cout<<p->data<<" ";
-        display(p->lchild);
-        display(p->rchild);
+        display_pre(p->lchild);
+        display_pre(p->rchild);
+    }
+}
+
+void display_in(node *p){
+    if(p){
+        display_in(p->lchild);
+        cout<<p->data<<" ";
+        display_in(p->rchild);
     }
 }
 
 
-/// level order treversal .......
-void display_iteration(){
-    queue<node*> q;
-    q.push(root);
-
-    while(!q.empty()){
-        node *t = q.front();
-        q.pop();
-        cout<<t->data<<" ";
-
-        if(t->lchild){
-            q.push(t->lchild);
-        }if(t->rchild){
-            q.push(t->rchild);
-        }
-    }
-}
-
-// PRE ODERES TREVERSAL........
-void display_iteration1(){
+void display_iteration_pre(){
     node *t = root;
-    stack<node*> s;
+    stack<node *> s;
+
     while(t || !s.empty()){
         if(t){
             cout<<t->data<<" ";
@@ -140,17 +129,19 @@ void display_iteration1(){
     }
 }
 
-//in order treversal............
-void display_iteration1(){
+void display_iteration_in(){
     node *t = root;
-    stack<node*> s;
+    stack<node *> s;
+
     while(t || !s.empty()){
         if(t){
+
             s.push(t);
             t = t->lchild;
         }else{
             t = s.top();
             s.pop();
+
             cout<<t->data<<" ";
 
             t = t->rchild;
