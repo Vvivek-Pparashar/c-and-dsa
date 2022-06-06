@@ -172,6 +172,35 @@ int height(node *p){
     }
 }
 
+// Check balance or not...
+int check_balance(node *p, int &temp){
+    int x = 0, y = 0;
+    if(p){
+        x = check_balance(p->left, temp);
+        y = check_balance(p->right, temp);
+
+        if(abs(x-y) > 1) temp = -1;
+        return max(x, y) + 1;
+    }
+}
+
+// Diameter of a tree
+static int maxi = 0;
+
+int diameter(node *p){
+    int x = 0, y = 0;
+    if(p){
+        x = diameter(p->left);
+        y = diameter(p->right);
+
+
+        if(x+y+1 > maxi) maxi = x+y+1;
+        return max(x, y) + 1;
+
+    }
+}
+
+
 // ACCUMULATE OF A TREE.....
 
 int accumulate(node *p){
@@ -215,6 +244,21 @@ int counting_of_1deg(node *p){
         if(p->lchild == NULL ^ p->rchild == NULL) return x+y+1;
         return x+y;
     }return 0;
+}
+
+// max route....        .
+int max_route(node *p){
+    int x = 0, y = 0;
+    if(p){
+        x = max(0, max_route(p->left));
+        y = max(0, max_route(p->right));
+
+        if(x+y + p->data > maxi) maxi = x+y + p->data;
+
+        return max(x, y) + p->data;
+
+    }
+    return 0;
 }
 
 int main()

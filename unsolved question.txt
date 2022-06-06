@@ -1,8 +1,0 @@
-1. 	st https://codeforces.com/problemset/problem/1654/C   
-	
-	solution
-		using mutiset and when the value find erase form q
-		else add x/2 x+1/2
-		erase all the time the current value
-		if x < *--q.end() break;
-		means no value can cancel out that value.....

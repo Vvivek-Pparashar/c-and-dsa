@@ -1,6 +1,22 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+#define fi                          first
+#define se                          second
+#define ll                          long long
+#define mod                         1000000007
+#define ull                         unsigned long long
+#define po                          pop_back
+#define pb                          push_back
+#define mp                          make_pair
+#define all(v)                      v.begin(), v.end()
+#define test                        int t;  cin>>t; while(t--)
+#define loop(n)                     for(int i = 0; i<n; i++)
+#define sort_inc(v)                 sort(all(v));
+#define sort_dec(v)                 sort(all(v), greater<int>());
+#define vivek_is_great              ios_base::sync_with_stdio(false) , cin.tie(NULL);
+
+// for matrix type this type is space kharchu....
 void bfs(int a[][7], int i)
 {
     int visited[7] = {0};
@@ -78,4 +94,7 @@ int main()
     cout<<endl;
     cout<<"D.F.S of graph is iterative   ->   ";
     dfs_iterative(a, 2);
+
+
+
 }
