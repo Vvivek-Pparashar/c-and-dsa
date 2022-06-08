@@ -1,4 +1,3 @@
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -128,6 +127,85 @@ bool solver_for_directed_dfs(){
     return false;
 }
 
+////////////////////////////////////////////////////////////////////
+//                        TOPOLOGY SORT                           //
+////////////////////////////////////////////////////////////////////
+
+void topology_dfs(stack<int> &s, vector<int> &visited, vector<int> adj[], int i){
+    visited[i] = 1;
+
+    for(auto it : adj[i]){
+        if(!visited[it])    topology_dfs(s, visited, adj, it);
+    }
+
+    s.push(i);
+}
+
+// for bfs it is also called khans algo....
+void topology_bfs(vector<int> adj[]){
+    vector<int> v_in(6, 0);
+    queue<int> q;
+    vector<int> final;
+
+    for(int i = 0; i<6; i++){
+        for(auto it : adj[i]){
+            v_in[it]++;
+        }
+    }
+
+
+    for(int i =0; i<6; i++){
+        if(!v_in[i]) q.push(i);
+    }
+
+
+    while(!q.empty()){
+        int n = q.front();
+        q.pop();
+
+        for(auto it : adj[n]){
+            v_in[it]--;
+            if(!v_in[it]) q.push(it);
+        }
+
+        final.pb(n);
+    }
+
+    for(auto it : final ) cout<<it<<" ";
+    cout<<endl;
+}
+
+void topology_solver(){
+    vector<int> adj[6];
+    adj[2].pb(3);
+    adj[3].pb(1);
+    adj[4].pb(0);
+    adj[4].pb(1);
+    adj[5].pb(0);
+    adj[5].pb(2);
+
+    stack<int> s;
+    vector<int> visited(6, 0);
+
+    loop(6){
+        if(!visited[i])
+            topology_dfs(s, visited, adj, i);
+    }
+
+    while(!s.empty()){
+        cout<<s.top()<<" ";
+        s.pop();
+    }
+
+    cout<<endl;
+
+    topology_bfs(adj);
+}
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+
 int main()
 {
     vector<int> adj[8];
@@ -146,17 +224,27 @@ int main()
     adj[6].pb(7);
     adj[7].pb(6);
 
+    /*
     if(solver_for_bypathic(adj))    cout<<"BIPATTE using bfs"<<endl;
     else cout<<"NOT BIPATTE using bfs"<<endl;
 
     if(solver_for_bypathic_dfs(adj))    cout<<"BIPATTE using dfs"<<endl;
     else cout<<"NOT BIPATTE using dfs"<<endl;
+    */
 
     ////////////////////////////////////////////////////////////////////
     //              CYCLIC CHECK IN DIRECTED GRAPH                    //
     ////////////////////////////////////////////////////////////////////
 
+    /*
     if(solver_for_directed_dfs()) cout<<"DIRECTED CYCLIC"<<endl;
     else cout<<"DIRECTED NOT CYCLIC"<<endl;
+    */
+
+    ////////////////////////////////////////////////////////////////////
+    //                        TOPOLOGY SORT                           //
+    ////////////////////////////////////////////////////////////////////
+
+    topology_solver();
 
 }
