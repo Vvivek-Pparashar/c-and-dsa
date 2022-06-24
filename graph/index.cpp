@@ -9,6 +9,8 @@ using namespace std;
 #define po                          pop_back
 #define pb                          push_back
 #define mp                          make_pair
+#define vll                         vector<long long>
+#define vpll                        vector<pair<long long, long long> >
 #define all(v)                      v.begin(), v.end()
 #define test                        int t;  cin>>t; while(t--)
 #define loop(n)                     for(int i = 0; i<n; i++)

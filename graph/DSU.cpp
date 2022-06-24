@@ -1,6 +1,3 @@
-//Code by Vivek Parashar
-//      linkedin  -> vivek parashar
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -23,23 +20,41 @@ using namespace std;
 #define sort_dec(v)                 sort(all(v), greater<int>());
 #define vivek_is_great              ios_base::sync_with_stdio(false) , cin.tie(NULL);
 
-void solve(){
+int parent[100], rankk[100];
 
+void makeset(){
+    loop(i, 10){
+        parent[i] = i;
+        rankk[i] = 0;
+    }
+}
+
+int findParent(int node){
+    if(parent[node] == node) return node;
+
+    return  parent[node] = findParent(parent[node]);
+}
+
+void unionn(int u, int v){
+    u = findParent(u);
+    v = findParent(v);
+
+    if(rankk[u] < rankk[v])    parent[u] = v;
+    else if(rankk[u] > rankk[v])    parent[v] = u;
+    else{
+        parent[v] = u;
+        rankk[u]++;
+    }
 }
 
 int main(){
-    vivek_is_great
-#ifndef ONLINE_JUDGE
-	freopen("input.txt", "r", stdin);
-	freopen("output.txt", "w", stdout);
-#endif
-
-
-
-    test
-    {
-        solve();
+    makeset();
+    int m;  cin>>m;
+    while(m--){
+        int u, v;   cin>>u>>v;
+        unionn(u, v);
     }
 
-
+    if(findParent(2) != findParent(3)) cout<<"NO"<<endl;
+    else cout<<"YES"<<endl;
 }
