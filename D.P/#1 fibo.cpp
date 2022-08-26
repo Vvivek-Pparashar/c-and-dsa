@@ -24,44 +24,18 @@ using namespace std;
 #define sort_dec(v)                 sort(all(v), greater<int>());
 #define vivek_is_great              ios_base::sync_with_stdio(false) , cin.tie(NULL);
 
+//  ---------------------------------------------------     MAIN CODE HERE   -------------------------------------------------------------------------  //
 
-void solve(){
-    int n, x, m;    cin>>n>>x>>m;
-    int a[n];
+int fibo_dp(int n, vector<int> &dp){
+    if(n<=1) return n;
+    if(dp[n] != -1) return dp[n];
 
-    loop(i, n) cin>>a[i];
-    sort(a, a+n);
-
-    multiset<int> s;
-
-    loop(i, n){
-        if(i == 0) s.insert(a[i]^x);
-        else{
-            for(auto it : s){
-                first = it;
-                break;
-            }
-
-            if((a[i]^x) > first){
-
-            }
-        }
-    }
+    return dp[n] = fibo_dp(n-1, dp) + fibo_dp(n-2, dp);
 }
-
 int main(){
-    vivek_is_great
-#ifndef ONLINE_JUDGE
-	freopen("input.txt", "r", stdin);
-	freopen("output.txt", "w", stdout);
-#endif
 
+    int n;  cin>>n;
+    vector<int> dp(n+1, -1);
 
-
-    test
-    {
-        solve();
-    }
-
-
+    cout<<fibo_dp(n, dp);
 }

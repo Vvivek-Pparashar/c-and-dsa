@@ -24,29 +24,31 @@ using namespace std;
 #define sort_dec(v)                 sort(all(v), greater<int>());
 #define vivek_is_great              ios_base::sync_with_stdio(false) , cin.tie(NULL);
 
+int solver(int index, vll a, vll &dp){
+    if(index == 0) return a[index];
+    if(index == 1) return a[index];
+
+    if(dp[index] != -1) return dp[index];
+
+    int left = solver(index - 2, a, dp) + a[index];
+    int right = -1;
+
+    if(index - 3 >= 0) right =  solver(index - 3, a, dp) + a[index];
+
+    return dp[index] = max(left, right);
+}
 
 void solve(){
-    int n, x, m;    cin>>n>>x>>m;
-    int a[n];
+    int n;  cin>>n;
+    vll dp(n+1, -1);
+    vll a(n);
 
     loop(i, n) cin>>a[i];
-    sort(a, a+n);
 
-    multiset<int> s;
+    int left = solver(n-1, a, dp);
+    int right = solver(n-2, a, dp);
 
-    loop(i, n){
-        if(i == 0) s.insert(a[i]^x);
-        else{
-            for(auto it : s){
-                first = it;
-                break;
-            }
-
-            if((a[i]^x) > first){
-
-            }
-        }
-    }
+    cout<<max(left, right)<<endl;
 }
 
 int main(){

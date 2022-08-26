@@ -24,29 +24,44 @@ using namespace std;
 #define sort_dec(v)                 sort(all(v), greater<int>());
 #define vivek_is_great              ios_base::sync_with_stdio(false) , cin.tie(NULL);
 
+// ----------------------------     tabulation  -----------------------------------------------
 
+int solver(int index, vector<int> a, vector<int> &dp){
+    if(index == 0) return 0;
+    if(dp[index] != -1) return dp[index];
+
+    int left = solver(index - 1, a, dp) + abs(a[index] - a[index-1]);
+    int right = INT_MAX;
+
+    if(index > 1) right = solver(index - 2, a, dp) + abs(a[index] - a[index-2]);
+
+    return dp[index] = min(left, right);
+}
+
+// ---------------------------------  Memorization  ---------------------------------------------
+int solve(int ind, vector<int>& height, vector<int>& dp){
+    if(ind==0) return 0;
+    if(dp[ind]!=-1) return dp[ind];
+    int jumpTwo = INT_MAX;
+    int jumpOne= solve(ind-1, height,dp)+ abs(height[ind]-height[ind-1]);
+    if(ind>1)
+        jumpTwo = solve(ind-2, height,dp)+ abs(height[ind]-height[ind-2]);
+
+    return dp[ind]=min(jumpOne, jumpTwo);
+}
+
+//-------------------------------------   solver   -----------------------------------------
 void solve(){
-    int n, x, m;    cin>>n>>x>>m;
-    int a[n];
+    int n;  cin>>n;
+    vector<int> a(n);
 
-    loop(i, n) cin>>a[i];
-    sort(a, a+n);
-
-    multiset<int> s;
-
-    loop(i, n){
-        if(i == 0) s.insert(a[i]^x);
-        else{
-            for(auto it : s){
-                first = it;
-                break;
-            }
-
-            if((a[i]^x) > first){
-
-            }
-        }
+    loop(i,n){
+       cin>>a[i];
     }
+
+    vector<int> dp(n+1, -1);
+
+    cout<<solver(n-1, a, dp)<<endl;
 }
 
 int main(){

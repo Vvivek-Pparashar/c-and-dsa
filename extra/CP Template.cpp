@@ -13,6 +13,7 @@ using namespace std;
 #define mod                         1000000007
 #define ull                         unsigned long long
 #define vll                         vector<long long>
+#define endl                        "\n"
 #define test                        int t;  cin>>t; while(t--)
 #define vpll                        vector<pair<long long, long long> >
 #define all(v)                      v.begin(), v.end()
@@ -22,6 +23,7 @@ using namespace std;
 #define sort_inc(v)                 sort(all(v));
 #define sort_dec(v)                 sort(all(v), greater<int>());
 #define vivek_is_great              ios_base::sync_with_stdio(false) , cin.tie(NULL);
+
 
 void solve(){
 
