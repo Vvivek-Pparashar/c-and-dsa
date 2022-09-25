@@ -2,18 +2,12 @@
 using namespace std;
 
 int main(){
-    int t;  cin>>t;
-    while(t--){
+    int n = 10;
 
-        int n;  cin>>n;
-        string s;   cin>>s;
-
-        set<char> se;
-
-        for(int i =0; i<n; i++){
-            se.insert(s[i]);
-        }
-
-        cout<<n+se.size()<<end;
+    long long z = 1;
+    for(int i = 1; i<=n; i++){
+        z = (i*z)%1000000007;
     }
+
+    cout<<z<<endl;
 }

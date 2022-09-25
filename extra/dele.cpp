@@ -1,67 +1,26 @@
-//Code by Vivek Parashar
-//      linkedin  -> vivek parashar
-
 #include<bits/stdc++.h>
 using namespace std;
 
-#define fi                          first
-#define se                          second
-#define ll                          long long
-#define pb                          push_back
-#define po                          pop_back
-#define mp                          make_pair
-#define mod                         1000000007
-#define ull                         unsigned long long
-#define vll                         vector<long long>
-#define endl                        "\n"
-#define test                        int t;  cin>>t; while(t--)
-#define vpll                        vector<pair<long long, long long> >
-#define all(v)                      v.begin(), v.end()
-#define prec(n)                     fixed<<setprecision(n)
-#define bits(n)                     __builtin_popcount(n)
-#define loop(i, n)                  for(int i = 0; i<n; i++)
-#define sort_inc(v)                 sort(all(v));
-#define sort_dec(v)                 sort(all(v), greater<int>());
-#define vivek_is_great              ios_base::sync_with_stdio(false) , cin.tie(NULL);
-
-
-void solve(){
-    int n, x, m;    cin>>n>>x>>m;
-    int a[n];
-
-    loop(i, n) cin>>a[i];
-    sort(a, a+n);
-
-    multiset<int> s;
-
-    loop(i, n){
-        if(i == 0) s.insert(a[i]^x);
-        else{
-            for(auto it : s){
-                first = it;
-                break;
-            }
-
-            if((a[i]^x) > first){
-
-            }
-        }
-    }
-}
-
 int main(){
-    vivek_is_great
-#ifndef ONLINE_JUDGE
+    #ifndef ONLINE_JUDGE
 	freopen("input.txt", "r", stdin);
 	freopen("output.txt", "w", stdout);
 #endif
+    int t;    cin>>t;
+    while(t--){
+        int n;  cin>>n;
+        int a[n];
 
+        for(int  i = 0; i<n; i++) cin>>a[i];
+        sort(a, a+n);
 
+        bool flag = true;
 
-    test
-    {
-        solve();
+        for(int  i = 1; i<n; i++){
+            if((a[i] - a[i-1]) > 1) flag = false;
+        }
+
+        if(flag) cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
     }
-
-
 }

@@ -17,12 +17,12 @@ public:
 };
 
 void create(stack1 *st)
-{
     cout<<"size of array  ";
     cin>>st->size1;
 
      st->a = new int[st->size1];
-     st->top = -1;
+     st->top = -1;{
+
 }
 
 void push(stack1 *st, int x)

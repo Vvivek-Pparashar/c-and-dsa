@@ -1,8 +1,13 @@
-#include <stdio.h>
-int main()
-{
-    const c = -11;
-    const int d = 34;
+#include<bits/stdc++.h>
+using namespace std;
 
-    printf("%d, %d\n", c, d);
+int main(){
+    int n = 5;
+
+    long long z = 1;
+    for(int i = 1; i<=n; i++){
+        z = (i*z)%1000000007;
+    }
+
+    cout<<z<<endl;
 }

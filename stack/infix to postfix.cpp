@@ -10,7 +10,7 @@ using namespace std;
 
 int operand(char x)
 {
-    if(x == '+' || x == '-' || x == '*' || x == '/') return 0;
+    if(x == '+' || x == '-' || x == '*' || x == '/' || x == '^') return 0;
     else return 1;
 }
 
@@ -18,6 +18,7 @@ int pre(char x)
 {
     if(x == '+' || x == '-' ) return 1;
     else if(x == '*' || x == '/') return 2;
+    else if(x == '^') return 3;
     return 0;
 }
 

@@ -209,4 +209,3 @@ int main()
     string s;   cin>>s;
     result(s);
 }
-
