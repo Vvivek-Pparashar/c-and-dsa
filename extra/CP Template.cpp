@@ -19,10 +19,11 @@ using namespace std;
 #define all(v)                      v.begin(), v.end()
 #define prec(n)                     fixed<<setprecision(n)
 #define bits(n)                     __builtin_popcount(n)
-#define loop(i, n)                  for(int i = 0; i<n; i++)
+#define loop(i, m, n)               for(int i = m; i<n; i++)
+#define loop_dec(i, m, n)           for(int i = m; i>=n; i--)
 #define sort_inc(v)                 sort(all(v));
 #define sort_dec(v)                 sort(all(v), greater<int>());
-#define vivek_is_great              ios_base::sync_with_stdio(false) , cin.tie(NULL);
+#define vivek_is_gr8                ios_base::sync_with_stdio(false) , cin.tie(NULL);
 
 
 void solve(){
@@ -30,7 +31,7 @@ void solve(){
 }
 
 int main(){
-    vivek_is_great
+    vivek_is_gr8
 #ifndef ONLINE_JUDGE
 	freopen("input.txt", "r", stdin);
 	freopen("output.txt", "w", stdout);

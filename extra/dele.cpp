@@ -22,39 +22,65 @@ using namespace std;
 #define loop(i, n)                  for(int i = 0; i<n; i++)
 #define sort_inc(v)                 sort(all(v));
 #define sort_dec(v)                 sort(all(v), greater<int>());
-#define vivek_is_great              ios_base::sync_with_stdio(false) , cin.tie(NULL);
+#define vivek_is_gr8                ios_base::sync_with_stdio(false) , cin.tie(NULL);
+
+int gcd(int a, int b)
+{
+    int result = min(a, b);
+    while (result > 0) {
+        if (a % result == 0 && b % result == 0) {
+            break;
+        }
+        result--;
+    }
+    return result;
+}
 
 
 void solve(){
     int n;  cin>>n;
-    string s;   cin>>s;
+    int a[n];
 
-    int temp[n+1];
+    loop(i, n) cin>>a[i];
 
-    loop(i, n+1){
-        if(i>0) temp[i] = (s[i-1] == '1');
-    }
+    if(a[n-1]%2 == 0){
+        for(int i = n-2; i>=0; i--){
+            if(a[i]%2){
+                int check = gcd(a[n-1], a[i]);
+                if(check == 1){
+                    cout<<n+i+1<<endl;
+                    return;
+                }
+            }
+        }
 
-    int cost[n+1] = {0};
+        cout<<-1<<endl;
+        return;
+    }else{
+        if(a[n-1] == 1) cout<<2*n<<endl;
+        else{
+            for(int i = n-2; i>=0; i--){
+                if(a[i]%2){
+                    int check = gcd(a[n-1], a[i]);
 
-    for(int i = n; i>=1; i--){
-        for(int j = i; j<=n; j+=i){
-            if(temp[j]) break;
-            cost[j] = i;
+                    if(check == 1){
+                        cout<<n+i+1<<endl;
+                        return;
+                    }
+                }else{
+                    cout<<n+i+1<<endl;
+                    return;
+                }
+            }
+
+            cout<<-1<<endl;
+            return;
         }
     }
-
-    ll count = 0;
-
-    loop(i, n+1){
-        if(!temp[i]) count += cost[i];
-    }
-
-    cout<<count<<endl;
 }
 
 int main(){
-    vivek_is_great
+    vivek_is_gr8
 #ifndef ONLINE_JUDGE
 	freopen("input.txt", "r", stdin);
 	freopen("output.txt", "w", stdout);

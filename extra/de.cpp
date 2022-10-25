@@ -1,3 +1,6 @@
+//Code by Vivek Parashar
+//      linkedin  -> vivek parashar
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -16,50 +19,52 @@ using namespace std;
 #define all(v)                      v.begin(), v.end()
 #define prec(n)                     fixed<<setprecision(n)
 #define bits(n)                     __builtin_popcount(n)
-#define loop(i, n)                  for(int i = 0; i<n; i++)
+#define loop(i, m, n)               for(int i = m; i<n; i++)
+#define loop_dec(i, m, n)           for(int i = m; i>=n; i--)
 #define sort_inc(v)                 sort(all(v));
 #define sort_dec(v)                 sort(all(v), greater<int>());
-#define vivek_is_great              ios_base::sync_with_stdio(false) , cin.tie(NULL);
+#define vivek_is_gr8                ios_base::sync_with_stdio(false) , cin.tie(NULL);
 
-int solver_dp(int sum_alice, int sum_bob, int count_alice, int count_bob, int i, int n, int a[], int &temp){
-    if(i == (n+1)/2){
-        if(count_alice >= count_bob){
-            if(sum_alice %2) return 0;
-            cout<<"HERE"<<endl;
-            temp = 1;
-            return 1;
-        }
 
-        return 0;
+void solver(int start, int end, int n, int sum, vector<int> &v, int s[], int count, int one){
+
+    if(start > end) return;
+    if(one == sum){
+        v.pb(count);
+        return;
     }
 
-    if(solver_dp(sum_alice + (a[i]%2), sum_bob, count_alice + 1, count_bob, i+1, n, a, temp)) return 1;
-    if(solver_dp(sum_alice, sum_bob + (a[i]%2), count_alice, count_bob + 1, i+1, n, a, temp)) return 1;
-
-    return 0;
+    solver(start+1, end, n, sum , v, s, count+1, one - (s[start]));
+    solver(start, end-1, n, sum , v, s, count+1, one - (s[end]));
 }
 
 
 void solve(){
-    int n;  cin>>n;
-    int a[n];
+    int n, sum;  cin>>n>>sum;
+    int s[n];
 
-    loop(i, n) {
-        cin>>a[i];
+    int one = 0;
+
+    loop(i, 0, n){
+        cin>>s[i];
+        if(s[i]) one++;
     }
 
-    int temp = 0;
-    solver_dp(0, 0, 0, 0, 0, n, a, temp);
+    vector<int> v;
 
-    if(temp) cout<<"Alice"<<endl;
-    else cout<<"Bob"<<endl;
+    solver(0, n-1, n, sum, v, s, 0, one);
 
+    if(v.size()){
+        sort_inc(v);
+        cout<<v[0]<<endl;
+        return;
+    }
 
-
+    cout<<-1<<endl;
 }
 
 int main(){
-    vivek_is_great
+    vivek_is_gr8
 #ifndef ONLINE_JUDGE
 	freopen("input.txt", "r", stdin);
 	freopen("output.txt", "w", stdout);
